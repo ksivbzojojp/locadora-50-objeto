@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f7fb" />
+    <meta
+      name="description"
+      content="Painel de gestão de veículos, clientes e locações da LocaMais."
+    />
+    <title>LocaMais — Gestão de locadora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="p5.min.js"></script>
+    <script defer src="locamais.js"></script>
+    <script defer src="testes.js"></script>
+    <script defer src="app.js"></script>
+    <script defer src="sketch.js"></script>
+  </head>
+  <body>
+    <div class="app-frame">
+      <aside class="side-rail" aria-label="Navegação principal">
+        <a class="rail-brand" href="#inicio" aria-label="LocaMais, início">
+          <span class="rail-logo">L<span>+</span></span>
+          <span class="rail-wordmark"
+            >loca<span>mais</span><small>FLEET STUDIO</small></span
+          >
+        </a>
+        <div class="rail-caption">WORKSPACE</div>
+        <nav class="rail-nav">
+          <a class="rail-link is-active" href="#inicio"
+            ><span class="rail-icon">◫</span><span>Visão geral</span
+            ><b>01</b></a
+          >
+          <a class="rail-link" href="#fleet-title"
+            ><span class="rail-icon">▦</span><span>Frota</span><b>02</b></a
+          >
+          <a class="rail-link" href="#rental-title"
+            ><span class="rail-icon">↗</span><span>Nova locação</span
+            ><b>03</b></a
+          >
+          <a class="rail-link" href="#active-title"
+            ><span class="rail-icon">◷</span><span>Em andamento</span
+            ><b>04</b></a
+          >
+          <a class="rail-link" href="#clients-title"
+            ><span class="rail-icon">◎</span><span>Clientes</span><b>05</b></a
+          >
+        </nav>
+        <div class="rail-spacer"></div>
+        <div class="rail-live-card">
+          <span class="live-pulse"></span>
+          <div>
+            <strong>Operação ativa</strong
+            ><small>Todos os sistemas funcionando</small>
+          </div>
+        </div>
+        <div class="rail-tests">
+          <span class="rail-caption">QUALIDADE DO SISTEMA</span>
+          <div
+            id="test-badge"
+            class="test-badge"
+            role="status"
+            aria-live="polite"
+          >
+            Testes: verificando…
+          </div>
+        </div>
+        <div class="rail-footer">
+          <span class="rail-avatar">LM</span>
+          <div><strong>LocaMais</strong><small>Equipe de operações</small></div>
+          <span class="rail-more">···</span>
+        </div>
+      </aside>
+
+      <main id="inicio" class="main-stage">
+        <header class="stage-header">
+          <div class="breadcrumb">
+            <span>Workspace</span><i>/</i><strong>Visão geral</strong>
+          </div>
+          <div class="header-actions">
+            <span class="header-date"
+              ><span class="calendar-mark">▦</span
+              ><span id="today-label">Hoje</span></span
+            ><span class="header-divider"></span
+            ><span class="header-user">L<span>+</span></span>
+          </div>
+        </header>
+
+        <section class="intro-block" aria-labelledby="page-title">
+          <div>
+            <p class="intro-kicker"><span></span> SEGUNDA-FEIRA, NOVO RITMO</p>
+            <h1 id="page-title">
+              A cidade não para.<br /><em>Sua frota também não.</em>
+            </h1>
+            <p class="intro-copy">
+              Uma visão clara da operação, para cada viagem começar bem.
+            </p>
+          </div>
+          <div class="intro-index">
+            <span>LOCAMAIS</span><strong>01<span>/</span>06</strong
+            ><small>FLEET OVERVIEW</small>
+          </div>
+        </section>
+
+        <section class="hero-strip" aria-label="Destaque da operação">
+          <div class="hero-copy">
+            <span class="hero-chip"><i></i> VISÃO EM TEMPO REAL</span>
+            <h2>Mobilidade feita<br />para ir mais longe.</h2>
+            <p>
+              Encontre o veículo certo, para a pessoa certa, no momento certo.
+            </p>
+            <a class="hero-link" href="#rental-title"
+              >Iniciar uma locação <span>↗</span></a
+            >
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <span class="hero-orbit orbit-one"></span
+            ><span class="hero-orbit orbit-two"></span
+            ><span class="hero-sun"></span>
+            <svg
+              class="hero-car"
+              viewBox="0 0 540 230"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M61 157h37l27-51c9-17 25-27 44-29l121-11c25-2 47 8 63 27l39 47 69 13c15 3 25 15 25 30v21H61v-47Z"
+                fill="#d7ff6d"
+              />
+              <path
+                d="m150 101-23 45h124V80l-79 7c-10 1-18 6-22 14Zm117-22v67h105l-31-38c-10-13-26-22-42-23l-32-6Z"
+                fill="#344736"
+              />
+              <path
+                d="M54 174h448"
+                stroke="#18261f"
+                stroke-width="8"
+                stroke-linecap="round"
+              />
+              <circle cx="153" cy="180" r="31" fill="#17221d" />
+              <circle cx="153" cy="180" r="13" fill="#d7ff6d" />
+              <circle cx="407" cy="180" r="31" fill="#17221d" />
+              <circle cx="407" cy="180" r="13" fill="#d7ff6d" />
+              <path
+                d="M60 200h432"
+                stroke="#d7ff6d"
+                stroke-opacity=".35"
+                stroke-width="2"
+                stroke-dasharray="7 10"
+              />
+            </svg>
+            <div class="hero-stamp"><span>LOCA</span><strong>GO.</strong></div>
+            <div class="hero-coordinate">23°33' S&nbsp; 46°38' W</div>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Resumo da locadora">
+          <article class="stat-card">
+            <div class="stat-topline">
+              <span>FROTA TOTAL</span><span class="stat-glyph">↗</span>
+            </div>
+            <strong id="stat-fleet">—</strong
+            ><small>veículos cadastrados</small>
+            <div class="stat-accent accent-blue"></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-topline">
+              <span>PRONTOS PRA RODAR</span><span class="stat-glyph">✳</span>
+            </div>
+            <strong id="stat-available">—</strong
+            ><small>disponíveis agora</small>
+            <div class="stat-accent accent-lime"></div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-topline">
+              <span>NA ESTRADA</span><span class="stat-glyph">◷</span>
+            </div>
+            <strong id="stat-active">—</strong
+            ><small>locações em andamento</small>
+            <div class="stat-accent accent-violet"></div>
+          </article>
+          <article class="stat-card revenue-card">
+            <div class="stat-topline">
+              <span>RECEITA REALIZADA</span><span class="stat-glyph">R$</span>
+            </div>
+            <strong id="stat-revenue">—</strong
+            ><small>locações finalizadas</small>
+            <div class="stat-accent accent-orange"></div>
+          </article>
+        </section>
+
+        <div
+          id="notice"
+          class="notice"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+
+        <div class="content-grid">
+          <section class="data-panel fleet-panel" aria-labelledby="fleet-title">
+            <div class="panel-heading">
+              <div>
+                <span class="panel-index">01 / INVENTÁRIO</span>
+                <h2 id="fleet-title">Frota <span>disponível</span></h2>
+              </div>
+              <span id="fleet-count" class="count-pill">0 veículos</span>
+            </div>
+            <div class="filters">
+              <label class="search-box"
+                ><span aria-hidden="true">⌕</span
+                ><input
+                  id="vehicle-search"
+                  type="search"
+                  placeholder="Modelo ou placa"
+                  aria-label="Buscar modelo ou placa" /></label
+              ><label class="select-wrap"
+                ><span class="sr-only">Filtrar por tipo</span
+                ><select id="vehicle-filter">
+                  <option value="all">Todos os tipos</option>
+                  <option value="carro">Carros</option>
+                  <option value="moto">Motos</option>
+                  <option value="caminhão">Caminhões</option>
+                </select></label
+              >
+            </div>
+            <div id="fleet-list" class="vehicle-grid"></div>
+            <div id="fleet-empty" class="empty-state" hidden>
+              Nenhum veículo encontrado. Tente outra busca.
+            </div>
+          </section>
+
+          <aside class="data-panel rental-panel" aria-labelledby="rental-title">
+            <div class="panel-heading">
+              <div>
+                <span class="panel-index">02 / NOVA VIAGEM</span>
+                <h2 id="rental-title">Alugar <span>um veículo</span></h2>
+              </div>
+              <span class="rental-mark">＋</span>
+            </div>
+            <p class="panel-intro">
+              Comece escolhendo quem vai dirigir. A gente cuida do resto.
+            </p>
+            <form id="rental-form">
+              <label for="customer-select">CLIENTE</label
+              ><select id="customer-select" required>
+                <option value="">Selecione um cliente</option></select
+              ><label for="vehicle-select">VEÍCULO</label
+              ><select id="vehicle-select" required>
+                <option value="">Escolha um cliente primeiro</option>
+              </select>
+              <div class="field-hint" id="vehicle-hint">
+                Veículos compatíveis com a CNH do cliente serão listados.
+              </div>
+              <label for="rental-days">DURAÇÃO DA VIAGEM</label>
+              <div class="input-suffix">
+                <input
+                  id="rental-days"
+                  type="number"
+                  min="1"
+                  max="30"
+                  step="1"
+                  value="3"
+                  required
+                /><span>DIAS</span>
+              </div>
+              <button class="primary-button" type="submit">
+                Confirmar locação <span>↗</span>
+              </button>
+            </form>
+            <div class="rental-note">
+              <span class="note-icon">i</span
+              ><span
+                ><strong>Locação inteligente</strong><br />CNH, disponibilidade
+                e descontos são validados automaticamente.</span
+              >
+            </div>
+          </aside>
+
+          <section
+            class="data-panel active-panel"
+            aria-labelledby="active-title"
+          >
+            <div class="panel-heading">
+              <div>
+                <span class="panel-index">03 / AO VIVO</span>
+                <h2 id="active-title">Na estrada <span>agora</span></h2>
+              </div>
+              <span id="active-count" class="count-pill count-live"
+                >0 ativas</span
+              >
+            </div>
+            <div id="active-list" class="active-list"></div>
+            <div id="active-empty" class="empty-state">
+              Tudo tranquilo por aqui. As próximas locações aparecem neste
+              painel.
+            </div>
+          </section>
+
+          <aside class="support-stack">
+            <section
+              class="data-panel compact-panel"
+              aria-labelledby="popular-title"
+            >
+              <div class="panel-heading">
+                <div>
+                  <span class="panel-index">04 / PREFERIDOS</span>
+                  <h2 id="popular-title">Mais <span>alugados</span></h2>
+                </div>
+                <span class="rank-mark">#TOP</span>
+              </div>
+              <div id="popular-list" class="rank-list"></div>
+            </section>
+            <section
+              class="data-panel compact-panel clients-panel"
+              aria-labelledby="clients-title"
+            >
+              <div class="panel-heading">
+                <div>
+                  <span class="panel-index">05 / COMUNIDADE</span>
+                  <h2 id="clients-title">Clientes <span>LocaMais</span></h2>
+                </div>
+                <span id="client-count" class="count-pill">0</span>
+              </div>
+              <div id="client-list" class="client-list"></div>
+            </section>
+          </aside>
+        </div>
+        <footer class="stage-footer">
+          <span>LOCA<span>MAIS</span> / FLEET STUDIO</span
+          ><span>Feito para deixar o próximo destino mais perto.</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

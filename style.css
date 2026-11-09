@@ -1,0 +1,2354 @@
+/* =========================================================
+   LocaMais Fleet Studio
+   Identidade: verde profundo, lima e fundo quente.
+   ========================================================= */
+
+/* 1. Base e tokens */
+:root {
+  color-scheme: light;
+  --ink: #18251e;
+  --ink-soft: #334238;
+  --muted: #748176;
+  --muted-light: #899489;
+  --line: #e3e7dc;
+  --paper: #f5f5ef;
+  --white: #ffffff;
+  --green: #1b3027;
+  --green-dark: #172922;
+  --lime: #d7ff6d;
+  --lime-dark: #b9e64f;
+  --shadow: 0 8px 24px rgba(30, 48, 36, 0.06);
+
+  font-family: "DM Sans", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid #a5c85c;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 2. Layout principal e navegação lateral */
+.app-frame {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+.side-rail {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 30px 18px 18px;
+  overflow-y: auto;
+  color: #f7f8f2;
+  background: var(--green-dark);
+}
+
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 48px 5px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.rail-logo {
+  display: grid;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 13px;
+  color: var(--green-dark);
+  background: var(--lime);
+  font:
+    800 22px Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -2px;
+}
+
+.rail-logo span {
+  font-size: 13px;
+  letter-spacing: 0;
+  vertical-align: top;
+}
+
+.rail-wordmark {
+  font:
+    800 21px Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -1px;
+}
+
+.rail-wordmark > span {
+  color: var(--lime);
+}
+
+.rail-wordmark small {
+  display: block;
+  margin-top: 4px;
+  color: #93a195;
+  font:
+    700 9px "DM Sans",
+    Arial,
+    sans-serif;
+  letter-spacing: 1.8px;
+}
+
+.rail-caption {
+  display: block;
+  margin: 0 0 12px 12px;
+  color: #91a095;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.rail-nav {
+  display: grid;
+  gap: 6px;
+}
+
+.rail-link {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #c1cbc1;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.rail-link:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.rail-link.is-active {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.rail-icon {
+  width: 22px;
+  color: #b6c4b1;
+  font-size: 17px;
+  text-align: center;
+}
+
+.rail-link.is-active .rail-icon {
+  color: var(--lime);
+}
+
+.rail-link b {
+  margin-left: auto;
+  color: #849489;
+  font:
+    600 10px "DM Sans",
+    Arial,
+    sans-serif;
+}
+
+.rail-link.is-active b {
+  color: #c9d8bf;
+}
+
+.rail-spacer {
+  flex: 1;
+  min-height: 35px;
+}
+
+.rail-live-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 2px 22px;
+  padding: 13px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.live-pulse {
+  position: relative;
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #bff35b;
+  box-shadow: 0 0 0 4px rgba(191, 243, 91, 0.12);
+}
+
+.rail-live-card strong,
+.rail-live-card small,
+.rail-footer strong,
+.rail-footer small {
+  display: block;
+}
+
+.rail-live-card strong {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rail-live-card small {
+  margin-top: 4px;
+  color: #b2beb2;
+  font-size: 10px;
+}
+
+.rail-tests {
+  margin: 0 2px 18px;
+}
+
+.rail-tests .rail-caption {
+  margin-left: 3px;
+  font-size: 9px;
+}
+
+.rail-tests .test-badge {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 11px;
+  border: 1px solid rgba(168, 212, 82, 0.45);
+  border-radius: 8px;
+  color: var(--lime);
+  background: rgba(215, 255, 109, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rail-tests .test-badge.fail {
+  border-color: rgba(241, 164, 157, 0.45);
+  color: #ffaaa1;
+  background: rgba(243, 95, 79, 0.1);
+}
+
+.rail-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 2px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.rail-avatar {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 10px;
+  color: var(--lime);
+  background: #344a3c;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.rail-footer strong {
+  font-size: 11px;
+}
+
+.rail-footer small {
+  margin-top: 3px;
+  color: #a0afa2;
+  font-size: 10px;
+}
+
+.rail-more {
+  margin-left: auto;
+  color: #b6c1b6;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+/* 3. Conteúdo, cabeçalho e apresentação */
+.main-stage {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 66px) 28px;
+  overflow: hidden;
+}
+
+.stage-header {
+  display: flex;
+  height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e7dd;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #818d83;
+  font-size: 12px;
+}
+
+.breadcrumb i {
+  color: #aab3a8;
+  font-style: normal;
+}
+
+.breadcrumb strong {
+  color: #39463e;
+  font-weight: 700;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-date {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #66746a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.calendar-mark {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 1px solid #e0e3d9;
+  border-radius: 9px;
+  color: #536259;
+  background: var(--white);
+  font-size: 15px;
+}
+
+.header-divider {
+  height: 25px;
+  border-left: 1px solid #dfe2d8;
+}
+
+.header-user {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--white);
+  background: var(--green);
+  font:
+    800 12px Manrope,
+    Arial,
+    sans-serif;
+}
+
+.header-user span {
+  color: var(--lime);
+}
+
+.intro-block {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 36px 0 25px;
+}
+
+.intro-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 12px;
+  color: #718071;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.intro-kicker span {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: #a8d443;
+  transform: rotate(45deg);
+}
+
+.intro-block h1 {
+  margin: 0;
+  color: #18251e;
+  font:
+    800 clamp(34px, 3.7vw, 48px) / 1.08 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -2px;
+}
+
+.intro-block h1 em {
+  color: #708548;
+  font-style: normal;
+}
+
+.intro-copy {
+  margin: 12px 0 0;
+  color: #748176;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.intro-index {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  padding-bottom: 4px;
+  color: #839086;
+}
+
+.intro-index span,
+.intro-index small {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.intro-index strong {
+  color: #334238;
+  font:
+    800 25px Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -1px;
+}
+
+.intro-index strong span {
+  padding: 0 4px;
+  color: #9aac7d;
+  font-size: 16px;
+}
+
+.intro-index small {
+  color: #929d91;
+}
+
+/* 4. Banner de destaque */
+.hero-strip {
+  position: relative;
+  display: grid;
+  min-height: 230px;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border-radius: 18px;
+  color: #f4f7ed;
+  background: var(--green);
+  isolation: isolate;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  padding: 29px 32px;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 99px;
+  color: #d3dfd2;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.hero-chip i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 8px var(--lime);
+}
+
+.hero-copy h2 {
+  margin: 14px 0 7px;
+  color: var(--white);
+  font:
+    800 29px / 1.08 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -0.8px;
+}
+
+.hero-copy p {
+  max-width: 370px;
+  margin: 0;
+  color: #bdc9bd;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  margin-top: 16px;
+  color: var(--lime);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.hero-link span {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid rgba(215, 255, 109, 0.5);
+  border-radius: 50%;
+  font-size: 15px;
+  transition: background 0.15s ease;
+}
+
+.hero-link:hover span {
+  background: rgba(215, 255, 109, 0.15);
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 230px;
+  overflow: hidden;
+}
+
+.hero-visual::before {
+  position: absolute;
+  right: -40px;
+  bottom: -72px;
+  width: 410px;
+  height: 190px;
+  border: 1px solid rgba(215, 255, 109, 0.2);
+  border-radius: 50%;
+  content: "";
+  transform: rotate(-12deg);
+}
+
+.hero-orbit {
+  position: absolute;
+  border: 1px solid rgba(215, 255, 109, 0.15);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.orbit-one {
+  top: -100px;
+  right: 5%;
+  width: 380px;
+  height: 260px;
+}
+
+.orbit-two {
+  top: -113px;
+  right: -7%;
+  width: 430px;
+  height: 280px;
+}
+
+.hero-sun {
+  position: absolute;
+  top: 25px;
+  right: 24%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 55px rgba(215, 255, 109, 0.3);
+  opacity: 0.92;
+}
+
+.hero-car {
+  position: absolute;
+  z-index: 1;
+  right: 4%;
+  bottom: 13px;
+  width: min(450px, 100%);
+  filter: drop-shadow(0 14px 9px rgba(8, 15, 12, 0.3));
+}
+
+.hero-stamp {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 9%;
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  border: 1px solid var(--lime);
+  border-radius: 50%;
+  color: var(--lime);
+  background: var(--green);
+  transform: rotate(11deg);
+}
+
+.hero-stamp span {
+  margin-bottom: -10px;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.hero-stamp strong {
+  font:
+    800 16px Manrope,
+    Arial,
+    sans-serif;
+}
+
+.hero-coordinate {
+  position: absolute;
+  right: 22px;
+  bottom: 13px;
+  color: #a3b1a4;
+  font:
+    600 9px "DM Sans",
+    Arial,
+    sans-serif;
+  letter-spacing: 1px;
+}
+
+/* 5. Indicadores rápidos */
+.app-frame .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 20px;
+}
+
+.app-frame .stat-card {
+  position: relative;
+  display: flex;
+  min-height: 116px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0;
+  overflow: hidden;
+  padding: 15px 17px;
+  border: 1px solid #e6e8df;
+  border-radius: 13px;
+  background: var(--white);
+  box-shadow: 0 4px 14px rgba(40, 54, 41, 0.04);
+}
+
+.stat-topline {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  color: #758175;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+}
+
+.stat-glyph {
+  color: #71836f;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.app-frame .stat-card > strong {
+  display: block;
+  margin-top: 10px;
+  color: #203026;
+  font:
+    800 27px Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -1px;
+}
+
+.app-frame .revenue-card > strong {
+  font-size: 22px;
+}
+
+.app-frame .stat-card > small {
+  margin-top: 3px;
+  color: #778377;
+  font-size: 11px;
+}
+
+.stat-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: #6177d8;
+}
+
+.accent-lime {
+  background: #a8cf41;
+}
+.accent-violet {
+  background: #9881d9;
+}
+.accent-orange {
+  background: #e3a45d;
+}
+
+.app-frame .notice {
+  margin: 0 0 15px;
+  padding: 13px 15px;
+  border: 1px solid #cbdcab;
+  border-radius: 10px;
+  color: #455c2e;
+  background: #f0f6e5;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.app-frame .notice.error {
+  border-color: #f0c5be;
+  color: #ad4638;
+  background: #fff2ef;
+}
+
+/* 6. Painéis e inventário */
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.78fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.data-panel {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e7e9e0;
+  border-radius: 15px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.panel-index {
+  display: block;
+  margin-bottom: 7px;
+  color: #788773;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+.app-frame .panel-heading h2 {
+  margin: 0;
+  color: #243229;
+  font:
+    800 21px Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: -0.55px;
+}
+
+.app-frame .panel-heading h2 span {
+  color: #75875c;
+  font-weight: 600;
+}
+
+.app-frame .count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 10px;
+  border-radius: 99px;
+  color: #586956;
+  background: #f1f3ed;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.app-frame .count-live {
+  color: #536e28;
+  background: #eff6df;
+}
+
+.app-frame .filters {
+  display: flex;
+  gap: 9px;
+  margin: 0 0 14px;
+}
+
+.app-frame .search-box {
+  display: flex;
+  min-width: 130px;
+  height: 42px;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid #e1e6da;
+  border-radius: 9px;
+  color: #718071;
+  background: #fbfcf9;
+}
+
+.app-frame .search-box span {
+  font-size: 21px;
+  line-height: 1;
+}
+
+.app-frame .search-box input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: 12px;
+}
+
+.app-frame .search-box input::placeholder {
+  color: #788579;
+  opacity: 1;
+}
+
+.app-frame .select-wrap select {
+  height: 42px;
+  padding: 0 28px 0 11px;
+  border: 1px solid #e1e6da;
+  border-radius: 9px;
+  color: #536254;
+  background: #fbfcf9;
+  font-size: 12px;
+}
+
+.app-frame .vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.app-frame .vehicle-card {
+  padding: 14px;
+  border: 1px solid #e6eade;
+  border-radius: 12px;
+  background: #fbfcf9;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.app-frame .vehicle-card:hover {
+  border-color: #c7d79c;
+  box-shadow: 0 7px 16px rgba(51, 69, 41, 0.08);
+  transform: translateY(-2px);
+}
+
+.app-frame .vehicle-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 9px;
+}
+
+.app-frame .vehicle-type {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #667566;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.app-frame .vehicle-symbol {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border-radius: 9px;
+  color: #42543a;
+  background: #eaf0dd;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.app-frame .availability {
+  padding: 6px 9px;
+  border-radius: 99px;
+  color: #526e2a;
+  background: #eff6df;
+  font-size: 10px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.app-frame .availability.busy {
+  color: #91611d;
+  background: #fff0d9;
+}
+
+.app-frame .vehicle-card h3 {
+  margin: 12px 0 4px;
+  color: #25342a;
+  font:
+    800 16px Manrope,
+    Arial,
+    sans-serif;
+}
+
+.app-frame .vehicle-meta {
+  margin: 0;
+  color: #6f7d70;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.app-frame .vehicle-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #e8ebe2;
+}
+
+.app-frame .plate {
+  padding: 5px 7px;
+  border-radius: 5px;
+  color: #566456;
+  background: #eef0e9;
+  font:
+    700 10px "DM Sans",
+    Arial,
+    sans-serif;
+  letter-spacing: 0.6px;
+}
+
+.app-frame .daily-price {
+  color: #778477;
+  font-size: 10px;
+  text-align: right;
+}
+
+.app-frame .daily-price strong {
+  display: block;
+  margin-top: 2px;
+  color: #344538;
+  font:
+    800 15px Manrope,
+    Arial,
+    sans-serif;
+}
+
+.app-frame .empty-state {
+  padding: 20px 13px;
+  border: 1px dashed #d7dfd0;
+  border-radius: 10px;
+  color: #718071;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* 7. Formulário de locação */
+.rental-panel {
+  position: relative;
+  overflow: hidden;
+  border-color: #dfe5cf;
+  background: #fbfcf6;
+}
+
+.rental-panel::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  background: var(--lime);
+  content: "";
+}
+
+.rental-mark {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 10px;
+  color: #26362a;
+  background: var(--lime);
+  font-size: 21px;
+}
+
+.app-frame .panel-intro {
+  margin: -4px 0 18px;
+  color: #687768;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.app-frame .rental-panel form {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-frame .rental-panel form > label {
+  margin: 0 0 6px;
+  color: #5f705e;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+}
+
+.app-frame .rental-panel select {
+  width: 100%;
+  height: 42px;
+  margin: 0 0 13px;
+  padding: 0 11px;
+  border: 1px solid #dce3d4;
+  border-radius: 9px;
+  color: #344638;
+  background: var(--white);
+  font-size: 13px;
+}
+
+.app-frame .rental-panel select:disabled {
+  color: #7e897b;
+  background: #f0f2eb;
+  cursor: not-allowed;
+}
+
+.app-frame .field-hint {
+  margin: -7px 0 14px;
+  color: #687768;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.app-frame .input-suffix {
+  display: flex;
+  height: 42px;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #dce3d4;
+  border-radius: 9px;
+  background: var(--white);
+}
+
+.app-frame .input-suffix input {
+  width: 100%;
+  height: 100%;
+  padding: 0 11px;
+  border: 0;
+  outline: 0;
+  border-radius: 9px;
+  color: #344236;
+  background: transparent;
+  font-size: 14px;
+}
+
+.app-frame .input-suffix span {
+  padding: 0 12px;
+  color: #687768;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.7px;
+}
+
+.app-frame .primary-button {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  border: 0;
+  border-radius: 9px;
+  color: #243126;
+  background: #c8ef61;
+  box-shadow: 0 5px 13px rgba(147, 189, 56, 0.22);
+  font-size: 13px;
+  font-weight: 800;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.app-frame .primary-button:hover {
+  background: var(--lime-dark);
+  transform: translateY(-1px);
+}
+
+.app-frame .rental-note {
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+  margin-top: 15px;
+  padding: 11px;
+  border-radius: 9px;
+  color: #657263;
+  background: #f0f2e9;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.app-frame .rental-note strong {
+  color: #45543f;
+  font-size: 11px;
+}
+
+.note-icon {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+  place-items: center;
+  border: 1px solid #bdcba9;
+  border-radius: 50%;
+  color: #596f40;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* 8. Locações, ranking e clientes */
+.app-frame .active-panel {
+  min-height: 185px;
+}
+
+.app-frame .active-list {
+  display: grid;
+  gap: 10px;
+}
+
+.app-frame .active-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 13px;
+  padding: 13px;
+  border: 1px solid #e4e9de;
+  border-radius: 11px;
+  background: #fcfdf9;
+}
+
+.app-frame .active-main {
+  min-width: 0;
+}
+
+.app-frame .active-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.app-frame .active-title strong {
+  color: #344238;
+  font-size: 13px;
+}
+
+.app-frame .active-sub {
+  margin: 6px 0 0;
+  color: #687768;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.app-frame .active-value {
+  margin-top: 8px;
+  color: #748174;
+  font-size: 11px;
+}
+
+.app-frame .active-value strong {
+  color: #40523f;
+  font-size: 12px;
+}
+
+.app-frame .return-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
+}
+
+.app-frame .return-field {
+  width: 72px;
+}
+
+.app-frame .return-field label {
+  display: block;
+  margin-bottom: 5px;
+  color: #687768;
+  font-size: 10px;
+}
+
+.app-frame .return-field input {
+  width: 100%;
+  height: 35px;
+  padding: 0 7px;
+  border: 1px solid #dce3d8;
+  border-radius: 7px;
+  color: #405044;
+  background: var(--white);
+  font-size: 12px;
+}
+
+.app-frame .return-button {
+  height: 35px;
+  padding: 0 11px;
+  border: 1px solid #cbdc9d;
+  border-radius: 7px;
+  color: #50672d;
+  background: #f3f8e7;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.app-frame .return-button:hover {
+  background: #e9f4d2;
+}
+
+.support-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.app-frame .compact-panel {
+  padding: 18px;
+}
+
+.rank-mark {
+  padding: 7px 9px;
+  border-radius: 7px;
+  color: #5b7630;
+  background: #eef5dc;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.app-frame .rank-list,
+.app-frame .client-list {
+  display: grid;
+  gap: 11px;
+}
+
+.app-frame .rank-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-frame .rank-number {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 8px;
+  color: #667565;
+  background: #f1f2eb;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.app-frame .rank-number.first {
+  color: #435a25;
+  background: #e3f2b3;
+}
+
+.app-frame .rank-info {
+  min-width: 0;
+}
+
+.app-frame .rank-info strong {
+  display: block;
+  overflow: hidden;
+  color: #3d4c40;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-frame .rank-info span {
+  display: block;
+  margin-top: 4px;
+  color: #718071;
+  font-size: 10px;
+}
+
+.app-frame .rank-count {
+  color: #596a58;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.app-frame .client-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-frame .client-avatar {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border-radius: 10px;
+  color: #536746;
+  background: #e9efdd;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.app-frame .client-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.app-frame .client-info strong {
+  display: block;
+  overflow: hidden;
+  color: #3e4d40;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-frame .client-info span {
+  display: block;
+  margin-top: 4px;
+  color: #748174;
+  font-size: 10px;
+}
+
+.app-frame .license-tag {
+  padding: 5px 7px;
+  border-radius: 6px;
+  color: #697867;
+  background: #f1f2ec;
+  font-size: 9px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.stage-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 22px 2px 5px;
+  color: #778477;
+  font-size: 10px;
+}
+
+.stage-footer > span:first-child {
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.stage-footer > span:first-child span {
+  color: #718450;
+}
+
+/* 9. Adaptação para telas médias */
+@media (max-width: 1120px) {
+  .app-frame {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .side-rail {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .main-stage {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+
+  .app-frame .active-card {
+    grid-template-columns: 1fr;
+  }
+
+  .app-frame .return-form {
+    justify-content: flex-start;
+  }
+}
+
+/* 10. Adaptação para tablets e celulares */
+@media (max-width: 820px) {
+  .app-frame {
+    display: block;
+  }
+
+  .side-rail {
+    position: sticky;
+    top: 0;
+    display: grid;
+    height: auto;
+    min-height: 0;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 17px;
+    overflow: visible;
+  }
+
+  .rail-brand {
+    margin: 0;
+  }
+
+  .rail-logo {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  .rail-wordmark {
+    font-size: 18px;
+  }
+
+  .rail-wordmark small {
+    font-size: 8px;
+  }
+
+  .side-rail > .rail-caption,
+  .rail-spacer,
+  .rail-live-card,
+  .rail-footer {
+    display: none;
+  }
+
+  .rail-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    overflow-x: auto;
+  }
+
+  .rail-link {
+    min-height: 38px;
+    gap: 7px;
+    padding: 0 9px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .rail-link b {
+    display: none;
+  }
+
+  .rail-icon {
+    width: auto;
+    font-size: 14px;
+  }
+
+  .rail-tests {
+    margin: 0;
+  }
+
+  .rail-tests .rail-caption {
+    display: none;
+  }
+
+  .rail-tests .test-badge {
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+
+  .main-stage {
+    padding-right: 22px;
+    padding-left: 22px;
+  }
+
+  .stage-header {
+    height: 58px;
+  }
+
+  .intro-block {
+    padding-top: 27px;
+  }
+
+  .hero-strip {
+    min-height: 210px;
+  }
+
+  .hero-visual {
+    min-height: 210px;
+  }
+
+  .app-frame .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+}
+
+@media (max-width: 640px) {
+  .side-rail {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 7px;
+    padding: 9px 12px;
+  }
+
+  .rail-brand {
+    gap: 8px;
+  }
+
+  .rail-logo {
+    width: 33px;
+    height: 33px;
+    flex-basis: 33px;
+  }
+
+  .rail-wordmark {
+    font-size: 16px;
+  }
+
+  .rail-wordmark small {
+    font-size: 7px;
+  }
+
+  .rail-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
+
+  .rail-link {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .rail-link.is-active {
+    background: rgba(255, 255, 255, 0.17);
+  }
+
+  .rail-tests .test-badge {
+    padding: 7px 8px;
+    font-size: 9px;
+  }
+
+  .main-stage {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .stage-header {
+    height: 52px;
+  }
+
+  .breadcrumb {
+    gap: 7px;
+    font-size: 10px;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .header-date {
+    gap: 6px;
+    font-size: 10px;
+  }
+
+  .calendar-mark {
+    width: 26px;
+    height: 26px;
+  }
+
+  .header-user {
+    width: 29px;
+    height: 29px;
+  }
+
+  .intro-block {
+    padding: 24px 0 17px;
+  }
+
+  .intro-kicker {
+    font-size: 9px;
+  }
+
+  .intro-block h1 {
+    font-size: clamp(30px, 8vw, 38px);
+    letter-spacing: -1.5px;
+  }
+
+  .intro-copy {
+    max-width: 320px;
+    font-size: 12px;
+  }
+
+  .intro-index {
+    display: none;
+  }
+
+  .hero-strip {
+    min-height: 190px;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  .hero-copy {
+    padding: 20px 17px;
+  }
+
+  .hero-chip {
+    gap: 6px;
+    padding: 6px 8px;
+    font-size: 8px;
+  }
+
+  .hero-copy h2 {
+    margin-top: 12px;
+    font-size: 22px;
+  }
+
+  .hero-copy p {
+    max-width: 240px;
+    font-size: 11px;
+  }
+
+  .hero-link {
+    gap: 8px;
+    margin-top: 11px;
+    font-size: 10px;
+  }
+
+  .hero-visual {
+    min-height: 190px;
+  }
+
+  .hero-car {
+    right: -17%;
+    bottom: 18px;
+    width: 135%;
+    max-width: none;
+  }
+
+  .hero-sun {
+    top: 18px;
+    right: 25%;
+    width: 42px;
+    height: 42px;
+  }
+
+  .hero-stamp {
+    top: 14px;
+    right: 7%;
+    width: 45px;
+    height: 45px;
+  }
+
+  .hero-stamp strong {
+    font-size: 13px;
+  }
+
+  .hero-coordinate {
+    right: 9px;
+    font-size: 7px;
+  }
+
+  .app-frame .stats-grid {
+    gap: 8px;
+    margin: 11px 0 13px;
+  }
+
+  .app-frame .stat-card {
+    min-height: 92px;
+    padding: 11px 12px;
+  }
+
+  .stat-topline {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  .app-frame .stat-card > strong {
+    margin-top: 8px;
+    font-size: 23px;
+  }
+
+  .app-frame .revenue-card > strong {
+    font-size: 18px;
+  }
+
+  .app-frame .stat-card > small {
+    font-size: 9px;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .data-panel {
+    padding: 15px;
+  }
+
+  .app-frame .panel-heading h2 {
+    font-size: 19px;
+  }
+
+  .panel-index {
+    font-size: 9px;
+  }
+
+  .app-frame .vehicle-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-frame .vehicle-card {
+    padding: 11px;
+  }
+
+  .app-frame .vehicle-card h3 {
+    font-size: 14px;
+  }
+
+  .app-frame .vehicle-meta {
+    font-size: 10px;
+  }
+
+  .app-frame .active-card {
+    grid-template-columns: 1fr;
+  }
+
+  .app-frame .return-form {
+    flex-wrap: wrap;
+  }
+
+  .app-frame .return-field {
+    width: 72px;
+  }
+
+  .support-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-footer {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rail-link {
+    gap: 6px;
+    padding: 0 8px;
+    font-size: 9px;
+  }
+
+  .rail-icon {
+    display: none;
+  }
+
+  .app-frame .vehicle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-strip {
+    grid-template-columns: 1fr 0.7fr;
+  }
+
+  .hero-copy h2 {
+    font-size: 20px;
+  }
+}
+
+/* 11. Ajuste final de legibilidade: rótulos, controles e textos auxiliares */
+.rail-caption {
+  font-size: 11px;
+}
+.rail-tests .rail-caption {
+  font-size: 10px;
+}
+.rail-live-card strong {
+  font-size: 13px;
+}
+.rail-live-card small,
+.rail-footer small {
+  font-size: 11px;
+}
+.rail-footer strong {
+  font-size: 12px;
+}
+.rail-link {
+  font-size: 14px;
+}
+.rail-link b {
+  font-size: 11px;
+}
+.breadcrumb,
+.header-date {
+  font-size: 13px;
+}
+.intro-kicker {
+  font-size: 11px;
+}
+.intro-copy {
+  font-size: 15px;
+}
+.intro-index span,
+.intro-index small {
+  font-size: 10px;
+}
+.hero-chip {
+  font-size: 10px;
+}
+.hero-copy h2 {
+  font-size: 32px;
+}
+.hero-copy p {
+  font-size: 14px;
+}
+.hero-link {
+  font-size: 13px;
+}
+.hero-coordinate {
+  font-size: 10px;
+}
+.stat-topline {
+  font-size: 11px;
+}
+.app-frame .stat-card > small {
+  font-size: 12px;
+}
+.panel-index {
+  font-size: 11px;
+}
+.app-frame .panel-heading h2 {
+  font-size: 22px;
+}
+.app-frame .count-pill {
+  font-size: 12px;
+}
+.app-frame .search-box input,
+.app-frame .select-wrap select {
+  font-size: 13px;
+}
+.app-frame .vehicle-type {
+  font-size: 12px;
+}
+.app-frame .availability {
+  font-size: 11px;
+}
+.app-frame .vehicle-card h3 {
+  font-size: 17px;
+}
+.app-frame .vehicle-meta {
+  font-size: 12px;
+}
+.app-frame .plate {
+  font-size: 11px;
+}
+.app-frame .daily-price {
+  font-size: 11px;
+}
+.app-frame .daily-price strong {
+  font-size: 16px;
+}
+.app-frame .panel-intro {
+  font-size: 13px;
+}
+.app-frame .rental-panel form > label {
+  font-size: 11px;
+}
+.app-frame .rental-panel select {
+  font-size: 14px;
+}
+.app-frame .field-hint {
+  font-size: 12px;
+}
+.app-frame .input-suffix input {
+  font-size: 15px;
+}
+.app-frame .input-suffix span {
+  font-size: 11px;
+}
+.app-frame .primary-button {
+  font-size: 14px;
+}
+.app-frame .rental-note,
+.app-frame .rental-note strong {
+  font-size: 12px;
+}
+.app-frame .active-title strong {
+  font-size: 14px;
+}
+.app-frame .active-sub,
+.app-frame .active-value {
+  font-size: 12px;
+}
+.app-frame .active-value strong {
+  font-size: 13px;
+}
+.app-frame .return-field label {
+  font-size: 11px;
+}
+.app-frame .return-field input,
+.app-frame .return-button {
+  font-size: 12px;
+}
+.rank-mark {
+  font-size: 11px;
+}
+.app-frame .rank-info strong {
+  font-size: 13px;
+}
+.app-frame .rank-info span,
+.app-frame .rank-count {
+  font-size: 11px;
+}
+.app-frame .client-info strong {
+  font-size: 12px;
+}
+.app-frame .client-info span {
+  font-size: 11px;
+}
+.app-frame .license-tag {
+  font-size: 10px;
+}
+.stage-footer {
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .rail-link {
+    font-size: 11px;
+  }
+  .breadcrumb,
+  .header-date {
+    font-size: 11px;
+  }
+  .intro-kicker {
+    font-size: 10px;
+  }
+  .intro-copy {
+    font-size: 13px;
+  }
+  .hero-chip {
+    font-size: 9px;
+  }
+  .hero-copy h2 {
+    font-size: 24px;
+  }
+  .hero-copy p {
+    font-size: 12px;
+  }
+  .hero-link {
+    font-size: 11px;
+  }
+  .hero-coordinate {
+    font-size: 8px;
+  }
+  .stat-topline {
+    font-size: 9px;
+  }
+  .app-frame .stat-card > small {
+    font-size: 10px;
+  }
+  .panel-index {
+    font-size: 10px;
+  }
+  .app-frame .panel-heading h2 {
+    font-size: 20px;
+  }
+  .app-frame .search-box input,
+  .app-frame .select-wrap select {
+    font-size: 12px;
+  }
+  .app-frame .vehicle-type {
+    font-size: 11px;
+  }
+  .app-frame .availability {
+    font-size: 10px;
+  }
+  .app-frame .vehicle-card h3 {
+    font-size: 15px;
+  }
+  .app-frame .vehicle-meta {
+    font-size: 11px;
+  }
+  .app-frame .panel-intro {
+    font-size: 12px;
+  }
+  .app-frame .rental-panel form > label {
+    font-size: 10px;
+  }
+  .app-frame .rental-panel select {
+    font-size: 13px;
+  }
+  .app-frame .field-hint,
+  .app-frame .rental-note,
+  .app-frame .rental-note strong {
+    font-size: 11px;
+  }
+  .app-frame .primary-button {
+    font-size: 13px;
+  }
+  .app-frame .active-title strong {
+    font-size: 13px;
+  }
+  .app-frame .active-sub,
+  .app-frame .active-value {
+    font-size: 11px;
+  }
+  .app-frame .rank-info strong {
+    font-size: 12px;
+  }
+  .app-frame .rank-info span,
+  .app-frame .rank-count {
+    font-size: 10px;
+  }
+  .app-frame .client-info strong {
+    font-size: 11px;
+  }
+  .app-frame .client-info span {
+    font-size: 10px;
+  }
+  .stage-footer {
+    font-size: 10px;
+  }
+}
+
+/* 12. Escala de leitura ampliada */
+body {
+  font-size: 16px;
+}
+.rail-caption {
+  font-size: 12px;
+}
+.rail-tests .rail-caption {
+  font-size: 11px;
+}
+.rail-link {
+  font-size: 15px;
+}
+.rail-live-card strong {
+  font-size: 14px;
+}
+.rail-live-card small,
+.rail-footer small {
+  font-size: 12px;
+}
+.rail-footer strong {
+  font-size: 13px;
+}
+.rail-tests .test-badge {
+  font-size: 13px;
+}
+.breadcrumb,
+.header-date {
+  font-size: 14px;
+}
+.intro-kicker {
+  font-size: 12px;
+}
+.intro-copy {
+  font-size: 16px;
+}
+.hero-chip {
+  font-size: 11px;
+}
+.hero-copy h2 {
+  font-size: 34px;
+}
+.hero-copy p {
+  font-size: 15px;
+}
+.hero-link {
+  font-size: 14px;
+}
+.stat-topline {
+  font-size: 12px;
+}
+.app-frame .stat-card > small {
+  font-size: 13px;
+}
+.panel-index {
+  font-size: 12px;
+}
+.app-frame .panel-heading h2 {
+  font-size: 24px;
+}
+.app-frame .count-pill {
+  font-size: 13px;
+}
+.app-frame .search-box input,
+.app-frame .select-wrap select {
+  font-size: 14px;
+}
+.app-frame .vehicle-type {
+  font-size: 13px;
+}
+.app-frame .availability {
+  font-size: 12px;
+}
+.app-frame .vehicle-card h3 {
+  font-size: 19px;
+}
+.app-frame .vehicle-meta {
+  font-size: 13px;
+}
+.app-frame .plate {
+  font-size: 12px;
+}
+.app-frame .daily-price {
+  font-size: 12px;
+}
+.app-frame .daily-price strong {
+  font-size: 18px;
+}
+.app-frame .panel-intro {
+  font-size: 14px;
+}
+.app-frame .rental-panel form > label {
+  font-size: 12px;
+}
+.app-frame .rental-panel select {
+  font-size: 15px;
+}
+.app-frame .field-hint {
+  font-size: 13px;
+}
+.app-frame .input-suffix input {
+  font-size: 16px;
+}
+.app-frame .input-suffix span {
+  font-size: 12px;
+}
+.app-frame .primary-button {
+  font-size: 15px;
+}
+.app-frame .rental-note,
+.app-frame .rental-note strong {
+  font-size: 13px;
+}
+.app-frame .active-title strong {
+  font-size: 15px;
+}
+.app-frame .active-sub,
+.app-frame .active-value {
+  font-size: 13px;
+}
+.app-frame .active-value strong {
+  font-size: 14px;
+}
+.app-frame .return-field label {
+  font-size: 12px;
+}
+.app-frame .return-field input,
+.app-frame .return-button {
+  font-size: 13px;
+}
+.rank-mark {
+  font-size: 12px;
+}
+.app-frame .rank-info strong {
+  font-size: 14px;
+}
+.app-frame .rank-info span,
+.app-frame .rank-count {
+  font-size: 12px;
+}
+.app-frame .client-info strong {
+  font-size: 13px;
+}
+.app-frame .client-info span {
+  font-size: 12px;
+}
+.app-frame .license-tag {
+  font-size: 11px;
+}
+.stage-footer {
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .rail-link {
+    font-size: 12px;
+  }
+  .rail-tests .test-badge {
+    font-size: 10px;
+  }
+  .breadcrumb,
+  .header-date {
+    font-size: 12px;
+  }
+  .intro-kicker {
+    font-size: 11px;
+  }
+  .intro-copy {
+    font-size: 14px;
+  }
+  .hero-chip {
+    font-size: 10px;
+  }
+  .hero-copy h2 {
+    font-size: 25px;
+  }
+  .hero-copy p {
+    font-size: 13px;
+  }
+  .hero-link {
+    font-size: 12px;
+  }
+  .stat-topline {
+    font-size: 10px;
+  }
+  .app-frame .stat-card > small {
+    font-size: 11px;
+  }
+  .panel-index {
+    font-size: 11px;
+  }
+  .app-frame .panel-heading h2 {
+    font-size: 21px;
+  }
+  .app-frame .search-box input,
+  .app-frame .select-wrap select {
+    font-size: 13px;
+  }
+  .app-frame .vehicle-type {
+    font-size: 12px;
+  }
+  .app-frame .availability {
+    font-size: 11px;
+  }
+  .app-frame .vehicle-card h3 {
+    font-size: 16px;
+  }
+  .app-frame .vehicle-meta {
+    font-size: 12px;
+  }
+  .app-frame .panel-intro {
+    font-size: 13px;
+  }
+  .app-frame .rental-panel form > label {
+    font-size: 11px;
+  }
+  .app-frame .rental-panel select {
+    font-size: 14px;
+  }
+  .app-frame .field-hint,
+  .app-frame .rental-note,
+  .app-frame .rental-note strong {
+    font-size: 12px;
+  }
+  .app-frame .primary-button {
+    font-size: 14px;
+  }
+  .app-frame .active-title strong {
+    font-size: 14px;
+  }
+  .app-frame .active-sub,
+  .app-frame .active-value {
+    font-size: 12px;
+  }
+  .app-frame .rank-info strong {
+    font-size: 13px;
+  }
+  .app-frame .rank-info span,
+  .app-frame .rank-count {
+    font-size: 11px;
+  }
+  .app-frame .client-info strong {
+    font-size: 12px;
+  }
+  .app-frame .client-info span {
+    font-size: 11px;
+  }
+  .stage-footer {
+    font-size: 11px;
+  }
+}
